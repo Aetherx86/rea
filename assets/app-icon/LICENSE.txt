@@ -1,0 +1,10 @@
+REA app icon (rea.svg and every file derived from it in this
+directory: rea-1024.png, rea.icns, rea.ico and
+hicolor/).
+
+This is the raven, the Crafting Apps' shared icon, made by the Aether Systems team. It is NOT covered
+by REA's MIT OR Apache-2.0 license. It is used on the same terms as the Aether Systems
+brand assets in docs/brand/LICENSE-brand.txt, which also say what forks and modified versions
+must do: replace it with their own icon.
+
+trace.py is a tool, covered by the repository's MIT OR Apache-2.0 license.

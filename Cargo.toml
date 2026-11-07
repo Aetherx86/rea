@@ -1,0 +1,99 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/*", "xtask"]
+
+[workspace.package]
+version = "7.0.1"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.97"
+repository = "https://github.com/Aetherx86/rea"
+
+[workspace.dependencies]
+# internal
+rea-evidence = { path = "crates/evidence" }
+rea-formats = { path = "crates/formats" }
+rea-disasm = { path = "crates/disasm" }
+rea-js = { path = "crates/js" }
+rea-analysis = { path = "crates/analysis" }
+rea-platform = { path = "crates/platform" }
+rea-engines = { path = "crates/engines" }
+rea-engine = { path = "crates/engine" }
+rea-ai = { path = "crates/ai" }
+rea-mcp = { path = "crates/mcp" }
+rea-setup = { path = "crates/setup" }
+rea-ui-egui = { path = "crates/ui-egui" }
+rea-testkit = { path = "crates/testkit" }
+
+# external
+thiserror = "2"
+serde = { version = "1", features = ["derive", "rc"] }
+serde_json = "1"
+serde_path_to_error = "0.1"
+sha2 = "0.10"
+hex = "0.4"
+bitflags = { version = "2", features = ["serde"] }
+schemars = "1"
+log = "0.4"
+toml = "0.9"
+eframe = { version = "0.36", default-features = false }
+egui = "0.36"
+egui_extras = { version = "0.36", default-features = false }
+egui_kittest = "0.36"
+rfd = "0.17"
+# Pictures pasted from the clipboard (egui only receives pasted text); egui-winit already uses it.
+arboard = { version = "3.6", default-features = false, features = ["image-data"] }
+rayon = "1"
+proptest = "1"
+# JavaScript (pure Rust, wasm-safe)
+oxc_allocator = "0.153"
+oxc_ast = "0.153"
+oxc_ast_visit = "0.153"
+oxc_parser = "0.153"
+oxc_span = "0.153"
+oxc_syntax = "0.153"
+oxc_codegen = "0.153"
+oxc_semantic = "0.153"
+miniz_oxide = "0.8"
+
+# native engine (pure Rust)
+object = { version = "0.36", default-features = false, features = ["read", "std"] }
+iced-x86 = { version = "1.21", default-features = false, features = ["std", "decoder", "intel", "instr_info"] }
+yaxpeax-arm = { version = "0.5", default-features = false, features = ["std", "alloc", "fmt"] }
+yaxpeax-arch = { version = "0.3", default-features = false, features = ["std", "alloc"] }
+rustc-demangle = "0.1"
+wasmparser = { version = "0.261", default-features = false, features = ["std", "validate", "features", "component-model", "simd"] }
+wasmprinter = { version = "0.261", default-features = false, features = ["component-model"] }
+regex = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+# The browser build (apps/rea-web, `trunk build --release`): small and fast to load.
+[profile.web-release]
+inherits = "release"
+opt-level = "s"
+lto = "fat"
+codegen-units = 1
+debug = false
+strip = true
+panic = "abort"
+
+# wgpu-hal with a Metal shader-language probe (REA #742; upstream wgpu #10687).
+# Remove this once the upstream wgpu release picks a Metal version the compiler accepts. See vendor/wgpu-hal/REA.md.
+[patch.crates-io]
+wgpu-hal = { path = "vendor/wgpu-hal" }

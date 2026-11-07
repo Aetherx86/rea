@@ -1,0 +1,46 @@
+[package]
+name = "rea-engine"
+description = "REA engine: session, projects, the tool registry every surface dispatches through, settings and jobs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rea-evidence = { workspace = true }
+rea-formats = { workspace = true }
+rea-disasm = { workspace = true }
+rea-js = { workspace = true }
+rea-analysis = { workspace = true }
+rea-platform = { workspace = true }
+rea-engines = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_path_to_error = { workspace = true }
+schemars = { workspace = true }
+bitflags = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+toml = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+regex = { workspace = true }
+dirs = "6"
+# Browser (Chrome DevTools Protocol) client: hand-rolled WebSocket framing needs only a SHA-1 and
+# base64 for the loopback handshake; PNG decoding is for screenshot pixel diffs. All pure Rust.
+base64 = "0.22"
+png = "0.17"
+# The person's reference pictures may be JPEG, WebP or GIF (decoders only; pure Rust, MIT/Apache).
+image = { version = "0.25", default-features = false, features = ["jpeg", "webp", "gif"] }
+
+[features]
+# WASM component plugins (R1.8): compiles wasmtime, so off by default.
+wasm-plugins = ["rea-engines/wasm-plugins"]
+
+[dev-dependencies]
+sha1 = "0.10"
+rea-testkit = { workspace = true }
+tempfile = "3"

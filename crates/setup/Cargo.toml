@@ -1,0 +1,27 @@
+[package]
+name = "rea-setup"
+description = "Connect REA to coding-agent apps: detect, plan, merge, back up, roll back, doctor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rea-evidence = { workspace = true }
+rea-engine = { workspace = true }
+rea-engines = { workspace = true }
+rea-formats = { workspace = true }
+rea-platform = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+log = { workspace = true }
+schemars = { workspace = true }
+toml = { workspace = true }
+toml_edit = "0.25"
+yaml-rust2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"

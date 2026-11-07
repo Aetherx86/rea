@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortImports": false,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "dist/**",
+    "build/**",
+    "target/**",
+    "crates/**",
+    "apps/**",
+    "xtask/**",
+    "vendor/**",
+    "docs/api/**",
+    "docs/schemas/**",
+    "docs/tools.md",
+    "node_modules/**",
+    "CHANGELOG.md",
+    "package-lock.json",
+    ".claude-plugin/plugin.json",
+    ".codex-plugin/plugin.json",
+    "_reference/**",
+    "third_party/**",
+    ".codex-plugin/mcp.json"
+  ]
+}
